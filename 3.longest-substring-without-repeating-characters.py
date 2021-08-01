@@ -7,25 +7,23 @@
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        substr = ""
-        longeststr = ""
-        for i in range(len(s)):
-            substr = s[i]
-            for j in range(i+1, len(s)):
-                if s[j] not in substr:
-                    substr += s[j]
-                elif s[j] in substr:
-                    longeststr = substr if len(substr) > len(longeststr) else longeststr
-                    break
-                longeststr = substr if len(substr) > len(longeststr) else longeststr
+        char_dic = {}
+        longest_size = 0
+        position = 0
 
-            if len(s) == 1:
-                longeststr = s
-        return len(longeststr)
+        for i, ch in enumerate(s):
+            if ch in char_dic:
+                # charが当たるたびに距離を更新
+                longest_size = max(longest_size, i-position)
+                # 前回のchar時点までpositionを更新する
+                position = max(position, char_dic[ch]+1)
+            char_dic[ch]=i
+        # 最終idx時にはpositionが更新できていない可能性がある
+        return max(longest_size, len(s)-position)
 
 if __name__ == "__main__":
     solution = Solution()
-    solution.lengthOfLongestSubstring(s="au")
+    solution.lengthOfLongestSubstring(s="abcabcbb")
         
 # @lc code=end
 
