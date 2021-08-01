@@ -1,0 +1,47 @@
+import java.util.Collection;
+import java.util.Collections;
+
+import jdk.internal.org.jline.terminal.impl.DumbTerminal;
+
+/*
+ * @lc app=leetcode id=2 lang=java
+ *
+ * [2] Add Two Numbers
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode p = l1;
+        ListNode q = l2;
+        ListNode curr = dummy;
+        int carry=0;
+        while(p!=null || q!=null){
+            int x = p!=null? p.val:0;
+            int y = q!=null? q.val:0;
+            int digit = x+y+carry;
+            carry = digit/10;
+            curr.next = new ListNode(digit % 10);
+            curr = curr.next;
+            if(p!=null){ p=p.next;}
+            if(q!=null){ q=q.next;}
+        }
+        if(carry > 0){
+            curr.next = new ListNode(carry);
+        }
+        return dummy.next;
+    }
+}
+// @lc code=end
+

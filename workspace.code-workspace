@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../Myspace/leetcode"
+		},
+		{
+			"name": ".leetcode",
+			"path": "../.leetcode"
+		}
+	],
+	"settings": {}
+}
